@@ -33,18 +33,7 @@ module.exports.post = async (req, res) => {
             "status": 422
         }
         return res.status(422).json(err);
-    }
-
-    let slug = form.title.replace(/ /g, '-');
-    if(slug != form.slug) {
-        let err = {
-            "success": false,
-            "errors": ['Title not match slug'],
-            "status": 422
-        }
-        return res.status(422).json(err);
-    }
-
+    }    
     let newsNew = await newsModel(form).save();
     let newsId = newsNew._id;
     let user = await userModel.findOne({email: email}).exec();
