@@ -54,15 +54,6 @@ module.exports.post = async (req, res) => {
 module.exports.put = async (req, res) => {
     let id = req.params['id'];
     let form = req.body;
-    let slug = form.title.replace(/ /g, '-');
-    if(slug != form.slug) {
-        let err = {
-            "success": false,
-            "errors": ['Title not match slug'],
-            "status": 422
-        }
-        return res.status(422).json(err);
-    }
     let newsUpdate = await newsModel.findByIdAndUpdate(id, form, {new: true}).exec();       
     let data = {
         "success": true,
